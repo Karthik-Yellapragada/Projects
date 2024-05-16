@@ -1,0 +1,88 @@
+<!-- myapp/templates/myapp/index.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voice Assistant</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style>
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    text-align: center;
+}
+
+.container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.microphone-btn {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-color: #4285f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 50px auto;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.microphone-btn:hover {
+    background-color: #3b78e7;
+}
+
+.microphone-icon {
+    color: #fff;
+    font-size: 40px;
+}
+
+.text-output {
+    margin-top: 20px;
+    font-size: 18px;
+}
+</style>
+</head>
+<body>
+<div class="container">
+    <h1>Welcome to My Fun {{ghij}}!</h1>
+    <p>Ask me anything and have some fun!</p>
+    <div class="microphone-btn" onclick='main' id="micBtn">
+        <i class="fas fa-microphone microphone-icon"></i>
+    </div>
+
+
+    <script>
+        $(document).ready(function(){
+            $('#micBtn').click(function(){
+
+                $.ajax({
+                    type: "POST",
+                    url: "{% url 'voice_assistant' %}",
+                    headers: { "X-CSRFToken": "{{ csrf_token }}" },  // Include CSRF token
+                    data: {},
+                    success: function(response) {
+                    },
+
+                });
+            });
+        });
+
+        function speak(text) {
+            var msg = new SpeechSynthesisUtterance();
+            msg.text = text;
+            window.speechSynthesis.speak(msg);
+        }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+</body>
+</html>

@@ -1,0 +1,20 @@
+<!-- myapp/templates/myapp/response.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voice Assistant Response</title>
+</head>
+<body>
+    <h1>Assistant Response</h1>
+    <div id="response_text">
+        {% if response_text %}
+            {{ response_text }}
+        {% else %}
+            No response received from the assistant.
+        {% endif %}
+    </div>
+</body>
+</html>

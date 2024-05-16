@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube Video Player</title>
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f0f0f0; /* Set background color */
+        }
+
+        #player {
+            width: 500px; /* Set width */
+            height: 500px; /* Set height */
+            border: none; /* Remove border */
+        }
+    </style>
+</head>
+<body>
+    <!-- Div element where the video player will be displayed -->
+    <div id="player"></div>
+
+    <!-- YouTube iFrame API script -->
+    <script src="https://www.youtube.com/iframe_api"></script>
+
+    <script>
+        var player;
+
+        // Function called when the YouTube iFrame API is ready
+        function onYouTubeIframeAPIReady() {
+            // Create a new YouTube player
+            player = new YT.Player('player', {
+                height: '100%', // Full screen height
+                width: '100%', // Full screen width
+                videoId: '{{source}}', // Replace with your YouTube video ID
+                playerVars: {
+                    'autoplay': 1, // Autoplay option (1 = true, 0 = false)
+                    'controls': 1, // Show player controls (1 = true, 0 = false)
+                    'fs': 1, // Enable full screen button (1 = true, 0 = false)
+                    'rel': 0, // Hide related videos at the end (1 = true, 0 = false)
+                    'modestbranding': 1 // Hide YouTube logo in the player (1 = true, 0 = false)
+                },
+                events: {
+                    'onReady': onPlayerReady
+                }
+            });
+        }
+
+        // Function called when the player is ready
+        function onPlayerReady(event) {
+            // Unmute the video after it's ready
+            event.target.unMute();
+        }
+    </script>
+</body>
+</html>
